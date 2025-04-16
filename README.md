@@ -20,10 +20,10 @@ This is a modern scientific calculator web application developed as part of our 
 
 | Team Member | Role | Contributions |
 |-------------|------|----------------|
-| **Alice**   | Frontend Developer | Created layout, component structure, and Material UI integration |
-| **Bob**     | Logic Developer    | Implemented expression handling and evaluation using `math.js` |
-| **Carol**   | UI/UX Specialist   | Added scientific functions and responsive design improvements |
-| **Dave**    | Feature Enhancer   | Developed history feature with localStorage and error handling |
+| **Ayush**   | Frontend Developer | Created layout, component structure, and Material UI integration |
+| **Yash**     | Logic Developer    | Implemented expression handling and evaluation using `math.js` |
+| **Dhruvi**   | UI/UX Specialist   | Added scientific functions and responsive design improvements |
+| **Nirav**    | Feature Enhancer   | Developed history feature with localStorage and error handling |
 
 ---
 
