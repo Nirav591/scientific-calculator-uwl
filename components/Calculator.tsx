@@ -7,7 +7,7 @@ import {
     useTheme,
     useMediaQuery,
 } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { evaluate } from 'mathjs';
 
 export default function Calculator() {
@@ -44,6 +44,28 @@ export default function Calculator() {
 
     const scientificButtons = ['sin', 'cos', 'tan', 'log', 'sqrt', 'pi', 'e'];
     const [history, setHistory] = useState<string[]>([]);
+
+    useEffect(() => {
+        const stored = localStorage.getItem('calc-history');
+        if (stored) {
+            setHistory(JSON.parse(stored));
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('calc-history', JSON.stringify(history));
+    }, [history]);
+
+    if (value === '=') {
+        try {
+            const result = evaluate(expression);
+            setHistory((prev) => [expression + ' = ' + result, ...prev]);
+            setExpression(result.toString());
+        } catch {
+            setExpression('Error');
+        }
+        return;
+    }
     return (
         <Box
             sx={{
@@ -86,6 +108,25 @@ export default function Calculator() {
             <Typography variant="subtitle1" gutterBottom sx={{ mt: 2 }}>
                 Numbers & Operators
             </Typography>
+            {history.length > 0 && (
+                <Box sx={{ mt: 3 }}>
+                    <Typography variant="subtitle1" gutterBottom>
+                        History
+                    </Typography>
+                    <Box sx={{ maxHeight: 200, overflowY: 'auto' }}>
+                        {history.map((item, i) => (
+                            <Typography
+                                key={i}
+                                variant="body2"
+                                sx={{ cursor: 'pointer', mb: 1 }}
+                                onClick={() => setExpression(item.split('=')[0].trim())}
+                            >
+                                {item}
+                            </Typography>
+                        ))}
+                    </Box>
+                </Box>
+            )}
             <Grid container spacing={1}>
                 {numericButtons.flat().map((btn, index) => (
                     <Grid item xs={3} key={index}>
