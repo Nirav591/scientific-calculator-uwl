@@ -41,6 +41,8 @@ export default function Calculator() {
         ['0', '.', '=', '+'],
         ['C', '(', ')', '^'],
     ];
+
+    const scientificButtons = ['sin', 'cos', 'tan', 'log', 'sqrt', 'pi', 'e'];
     return (
         <Box
             sx={{
@@ -68,6 +70,18 @@ export default function Calculator() {
                     Clear
                 </Button>
             </Box>
+            <Typography variant="subtitle1" gutterBottom>
+                Scientific Functions
+            </Typography>
+            <Grid container spacing={1} sx={{ mb: 2 }}>
+                {scientificButtons.map((btn, index) => (
+                    <Grid item xs={4} sm={2} key={index}>
+                        <Button fullWidth variant="outlined" onClick={() => handleClick(`${btn}(`)}>
+                            {btn}
+                        </Button>
+                    </Grid>
+                ))}
+            </Grid>
             <Typography variant="subtitle1" gutterBottom sx={{ mt: 2 }}>
                 Numbers & Operators
             </Typography>
