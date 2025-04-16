@@ -43,6 +43,7 @@ export default function Calculator() {
     ];
 
     const scientificButtons = ['sin', 'cos', 'tan', 'log', 'sqrt', 'pi', 'e'];
+    const [history, setHistory] = useState<string[]>([]);
     return (
         <Box
             sx={{
