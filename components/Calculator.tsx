@@ -1,14 +1,14 @@
+import React, { useState, useEffect } from 'react';
 import {
-    Box,
-    Button,
-    Grid,
-    TextField,
-    Typography,
-    useTheme,
-    useMediaQuery,
-  } from '@mui/material';
-  import { useState, useEffect } from 'react';
-  import { evaluate } from 'mathjs';
+  Box,
+  Button,
+  TextField,
+  Typography,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
+import Grid from '@mui/material/Grid'; 
+import { evaluate } from 'mathjs';
   
   const numericButtons = [
     ['7', '8', '9', '/'],
@@ -26,7 +26,7 @@ import {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
-    // Load history from localStorage on initial render
+    // Load history from localStorage
     useEffect(() => {
       const stored = localStorage.getItem('calc-history');
       if (stored) {
@@ -34,7 +34,7 @@ import {
       }
     }, []);
   
-    // Save history to localStorage when it changes
+    // Save history when it changes
     useEffect(() => {
       localStorage.setItem('calc-history', JSON.stringify(history));
     }, [history]);
@@ -48,7 +48,7 @@ import {
       if (value === '=') {
         try {
           const result = evaluate(expression);
-          setHistory((prev) => [expression + ' = ' + result, ...prev]);
+          setHistory((prev) => [`${expression} = ${result}`, ...prev.slice(0, 9)]);
           setExpression(result.toString());
         } catch {
           setExpression('Error');
